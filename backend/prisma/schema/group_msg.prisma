@@ -1,0 +1,12 @@
+model Group_msg {
+    groupMsgId  Int      @id @default(autoincrement())
+    message    String
+    senderId    Int
+    groupId     Int
+    fileAddress String?
+    created_at  DateTime @default(now())
+    updated_at  DateTime @default(now())
+
+    group Group @relation(fields: [groupId], references: [groupId], onDelete: Cascade)
+    sender User @relation(fields: [senderId], references: [userId], onDelete: Cascade)
+}

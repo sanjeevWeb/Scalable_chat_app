@@ -1,0 +1,30 @@
+export enum ERROR_MESSAGE {
+    BAD_REQUEST = "Bad Request",
+    UNAUTHORIZED = "Session expired, please login again",
+    FORBIDDEN = "Forbidden",
+    NOT_FOUND = "Not found",
+    METHOD_NOT_ALLOW = "Method not allowed",
+    NOT_ACCEPTABLE = "Not acceptable",
+    PRECONDITION_FAIL = "Precondition failed",
+    UNSUPPORT_MEDIA_TYPE = "Unsupported media type",
+    UNPROCESSABLE_ENTITY = "Unprocessable entity",
+    INTERNAL_SERVER = "Interal Server",
+    NOT_IMPLEMENT = "Not implemented",
+}
+
+export enum API_RESPONSE_MESSAGE {
+    UNEXPECTED = "Unexcepted error",
+    RECORD_ALREADY_EXISTS = "Record already exists",
+    SOMETHING = "Something went wrong",
+    INVALID = "Invalid/Incomplete payload",
+    SUCCESS = "Successfully Executed",
+    NOT_FOUND = "Not Found",
+    UNAUTHORIZED = "Unauthorized request",
+    TOKEN_EXPIRED = "Expired Token, Unauthorized request",
+    SIZE_EXCEEDED = "File size exceeded",
+    INVALIDDATERANGE = "Date Range provided is Invalid",
+    INVALIDDATE = "Invalid Date",
+    ACTIVITY_DETAIL_DATA = "Activities Data Detail",
+    WRONG_TIME = "Wrong Time of client",
+    INCORRECT_QUANTITY = "In correct quantity",
+}

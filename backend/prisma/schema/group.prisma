@@ -1,0 +1,11 @@
+model Group {
+    groupId    Int      @id @default(autoincrement())
+    groupName  String
+    adminId    Int
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now())
+
+    admin         User            @relation(fields: [adminId], references: [userId], onDelete: Cascade) // A group must have an admin
+    groupMembers  Group_members[]
+    groupMessages Group_msg[]
+}

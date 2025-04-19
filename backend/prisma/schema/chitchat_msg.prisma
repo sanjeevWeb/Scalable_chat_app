@@ -1,0 +1,13 @@
+model Chitchat_msg {
+    chitchatId  Int      @id @default(autoincrement())
+    message     String
+    senderId    Int
+    receiverId  Int
+    fileAddress String?
+    created_at  DateTime @default(now())
+    updated_at  DateTime @default(now())
+
+    // sender User @relation(fields: [senderId], references: [userId])
+    sender   User @relation(name: "SentMessages", fields: [senderId], references: [userId], onDelete: Cascade)
+    receiver User @relation(name: "ReceivedMessages", fields: [receiverId], references: [userId], onDelete: Cascade)
+}

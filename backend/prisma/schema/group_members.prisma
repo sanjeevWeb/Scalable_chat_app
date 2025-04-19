@@ -1,0 +1,12 @@
+model Group_members {
+    groupMemberId  Int      @id @default(autoincrement())
+    memberId    Int
+    groupId     Int
+    created_at  DateTime @default(now())
+    updated_at  DateTime @default(now())
+
+    group Group @relation(fields: [groupId], references: [groupId], onDelete: Cascade)
+    member User @relation(fields: [memberId], references: [userId], onDelete: Cascade)
+
+    @@unique([memberId, groupId]) // Ensure a user cannot join the same group twice
+}

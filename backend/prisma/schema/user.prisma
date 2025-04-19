@@ -1,0 +1,20 @@
+model User {
+  userId     Int      @id @default(autoincrement())
+  username   String   @db.VarChar(191)
+  email      String   @unique
+  password   String?
+  provider   String?
+  oauth_id   String?
+  profile_image String? @db.VarChar(191)
+  profile_status String? @db.VarChar(191)
+  last_seen_at DateTime? @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  // Relations
+  sentMessages     Chitchat_msg[]  @relation("SentMessages") // One-to-Many with Chitchat_msg (sent messages)
+  receivedMessages Chitchat_msg[]  @relation("ReceivedMessages") // One-to-Many with Chitchat_msg (received messages)
+  groupMemberships Group_members[] // Many-to-Many through Group_members
+  groupMessages    Group_msg[] // One-to-Many with Group_msg
+  group            Group[]
+}
