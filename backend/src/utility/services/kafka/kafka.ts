@@ -39,7 +39,7 @@ export async function createConsumer() {
     }
 }
 
-export async function produceMessages(message: string) {
+export async function produceMessages(toUserId: string,message: any) {
     const producer = await createProducer();
     try {
         await producer.send({
