@@ -4,7 +4,7 @@ import { RequestJwtValidator } from 'utility/hash/jwtValidate.js'
 
 const router: any = Router()
 
-router.post('/user', authController.login)
+router.post('/user/login', authController.login)
 
 router.put('/user',RequestJwtValidator ,authController.updateUser)
 

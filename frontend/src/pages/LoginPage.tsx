@@ -1,0 +1,68 @@
+import { Link } from "react-router-dom";
+import rightImage from '../assets/purple_flower_chat2.jpg'
+
+function LoginPage() {
+  return (
+    <div className="bg-white rounded-2xl shadow-lg flex overflow-hidden max-w-4xl w-full">
+      {/* Left */}
+      <div className="w-1/2 p-8 flex flex-col justify-center">
+        <div className="flex flex-col justify-center h-full">
+          <h2 className="text-3xl font-bold mb-2 text-green-900 text-center">Welcome Back</h2>
+          <p className="text-gray-600 mb-6 text-center">Login to your account</p>
+          <form className="space-y-4">
+            <input
+              type="email"
+              placeholder="Email"
+              className="input-style"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="input-style"
+            />
+            <button className="w-full bg-green-800 hover:bg-green-700 text-white py-2 rounded-md">
+              Sign In
+            </button>
+          </form>
+
+          <div className="flex items-center justify-center gap-4 my-6">
+            <div className="border-t w-1/3"></div>
+            <span className="text-gray-400 text-sm">OR</span>
+            <div className="border-t w-1/3"></div>
+          </div>
+
+          <button
+            disabled
+            className="w-full bg-gray-100 text-gray-700 py-2 rounded-md flex items-center justify-center gap-2"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              alt="Google"
+              className="w-5 h-5"
+            />
+            Sign in with Google (Coming Soon)
+          </button>
+
+          <p className="text-center mt-6 text-sm text-gray-600">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-green-700 font-semibold">
+              Register
+            </Link>
+          </p>
+        </div>
+      </div>
+
+      {/* Right */}
+      <div className="w-1/2 relative">
+        <img
+          src={rightImage}
+          alt="Login Visual"
+          className="object-cover h-full w-full"
+        />
+        {/* <div className="absolute inset-0 bg-black bg-opacity-20"></div> Optional: slight dark overlay */}
+      </div>
+    </div>
+  );
+}
+
+export default LoginPage;

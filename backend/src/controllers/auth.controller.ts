@@ -21,7 +21,7 @@ class AuthController {
                 let hashedPassword: string | undefined;
 
                 if (password) {
-                    hashedPassword = await hashPassword(password); // Hash the password before saving
+                    hashedPassword = await hashPassword(password); 
                 }
 
                 findUser = await prisma.user.create({
