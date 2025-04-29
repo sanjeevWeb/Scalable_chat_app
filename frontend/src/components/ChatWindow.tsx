@@ -1,38 +1,39 @@
 import { useState, useEffect, useRef } from "react";
 import MessageInput from "./MessageInput";
 
-function ChatWindow() {
-    const [messages, setMessages] = useState([
-        { text: "Hey Elon How Tesla going? 😊", sender: "me", time: "1 hour ago" },
-        { text: "Oh faced a lot of hard time but now everything is good", sender: "them", time: "1 hour ago" },
-        { text: "yes what about you", sender: "them", time: "1 hour ago" },
-        { text: "Seems good now", sender: "me", time: "1 hour ago" },
-        { text: "Elon why are you offline now 😁", sender: "me", time: "1 hour ago" },
-    ]);
-
+// [
+//     { text: "Hey Elon How Tesla going? 😊", sender: "me", time: "1 hour ago" },
+//     { text: "Oh faced a lot of hard time but now everything is good", sender: "them", time: "1 hour ago" },
+//     { text: "yes what about you", sender: "them", time: "1 hour ago" },
+//     { text: "Seems good now", sender: "me", time: "1 hour ago" },
+//     { text: "Elon why are you offline now 😁", sender: "me", time: "1 hour ago" },
+// ]
+function ChatWindow({ chat, messages }: { chat: any, messages: any[] }) {
     const [isTyping, setIsTyping] = useState(false);
-    const messagesEndRef = useRef(null);
+    const messagesEndRef: any = useRef(null);
 
-    const handleSend = (newMessage: any) => {
-        setMessages((prev) => [...prev, { text: newMessage, sender: "me", time: "just now" }]);
-        setIsTyping(false);  // Stop typing when message sent
+    const handleSend = (newMessage: string) => {
+        // Optimistically update messages
+        // You may want to POST to backend too
     };
 
-    // Auto-scroll to bottom
     useEffect(() => {
         if (messagesEndRef.current) {
-            // messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [messages]);
+
+    if (!chat) {
+        return <div className="flex-1 flex items-center justify-center text-gray-500">Select a chat to start messaging</div>;
+    }
 
     return (
         <div className="flex-1 h-full flex flex-col bg-gradient-to-tr from-white to-blue-50">
             <div className="flex items-center gap-4 p-4 border-b">
-                <img src="https://randomuser.me/api/portraits/men/2.jpg" className="w-12 h-12 rounded-full" alt="User" />
-                <div className="text-lg font-bold">Elon Musk</div>
+                <img src={chat.img || "https://picsum.photos/200"} className="w-12 h-12 rounded-full" alt="User" />
+                <div className="text-lg font-bold">{chat.name}</div>
             </div>
 
-            {/* Messages */}
             <div className="flex-1 p-4 overflow-y-auto space-y-4">
                 {messages.map((msg, idx) => (
                     <div key={idx} className={`flex ${msg.sender === "me" ? "justify-end" : "justify-start"}`}>
@@ -42,8 +43,6 @@ function ChatWindow() {
                         </div>
                     </div>
                 ))}
-
-                {/* Typing indicator */}
                 {isTyping && (
                     <div className="flex justify-start">
                         <div className="bg-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm">
@@ -51,15 +50,13 @@ function ChatWindow() {
                         </div>
                     </div>
                 )}
-
-                {/* Dummy div for auto-scroll */}
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
             <MessageInput onSend={handleSend} onTyping={() => setIsTyping(true)} />
         </div>
     );
 }
+
 
 export default ChatWindow;

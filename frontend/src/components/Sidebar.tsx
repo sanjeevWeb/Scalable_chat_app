@@ -1,30 +1,53 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import CreateGroupModal from "./CreateGroupModal";
 
-const initialState = [
-    { name: "Paul Walker", status: "Offline", img: "https://randomuser.me/api/portraits/men/1.jpg" },
-    { name: "Elon Musk", status: "Offline", img: "https://randomuser.me/api/portraits/men/2.jpg" },
-    { name: "Mark ZuckerBurg", status: "Offline", img: "https://randomuser.me/api/portraits/men/3.jpg" },
-    { name: "Chou Tzu-yu", status: "Offline", img: "https://randomuser.me/api/portraits/women/1.jpg" },
-];
+function Sidebar({ onChatSelect }: { onChatSelect: (group: any) => void }) {
+    const [groups, setGroups] = useState([{ name: "my-group", members: 10 }]);
+    const [showModal, setShowModal] = useState(false);
 
-function Sidebar() {
-    const [users, setUsers] = useState(initialState);
+    const fetchGroups = async () => {
+        try {
+            const res = await axios.get("http://localhost:7000/api/groups");
+            setGroups(res.data);
+        } catch (err) {
+            console.error("Failed to fetch groups", err);
+        }
+    };
 
+    useEffect(() => {
+        fetchGroups();
+    }, []);
 
     return (
-        <div className="w-72 bg-white shadow-md p-4 overflow-y-auto">
-            <div className="text-lg font-bold mb-4">Chats</div>
-            {users.length > 0 && users.map((user, idx) => (
-                <div key={idx} className="flex items-center gap-4 mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded">
-                    <img src={user.img} alt={user.name} className="w-10 h-10 rounded-full" />
+        <div className="w-72 bg-green-100 shadow-md p-4 overflow-y-auto rounded-2xl">
+            <div className="text-lg font-bold mb-4 flex justify-between items-center">
+                Your Chats..
+                <span onClick={() => setShowModal(true)} className="cursor-pointer text-3xl font-extrabold text-green-900">+</span>
+            </div>
+
+            {groups.map((group:any, idx) => (
+                <div
+                    key={idx}
+                    onClick={() => onChatSelect(group)}
+                    className="flex items-center gap-4 mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded"
+                >
+                    <img src={group.img || "https://picsum.photos/200/300"} className="w-10 h-10 rounded-full" />
                     <div>
-                        <div className="font-semibold">{user.name}</div>
-                        <div className="text-sm text-gray-500">{user.status}</div>
+                        <div className="font-semibold">{group.name}</div>
+                        <div className="text-sm text-gray-500">{group.members.length} members</div>
                     </div>
                 </div>
             ))}
+
+            {showModal && (
+                <CreateGroupModal
+                    onClose={() => setShowModal(false)}
+                    onGroupCreated={fetchGroups}
+                />
+            )}
         </div>
     );
 }
 
-export default Sidebar;
+export default Sidebar

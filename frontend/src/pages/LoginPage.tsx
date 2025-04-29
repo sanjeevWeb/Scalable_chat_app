@@ -43,14 +43,14 @@ function LoginPage() {
         <div className="flex flex-col justify-center h-full">
           <h2 className="text-3xl font-bold mb-2 text-green-900 text-center">Welcome Back</h2>
           <p className="text-gray-600 mb-6 text-center">Login to your account</p>
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form className="space-y-4 w-full" onSubmit={handleSubmit}>
             <input
               type="email"
               name="username"
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="input-style p-1 outline-1 w-full rounded m-1.5"
+              className="input-style w-full p-1 outline-1 rounded m-1.5"
             />
             <input
               type="password"
@@ -58,7 +58,7 @@ function LoginPage() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Password"
-              className="input-style p-1 outline-1 w-full rounded m-1.5"
+              className="input-style w-full p-1 outline-1 rounded m-1.5"
             />
             <button type="submit" className="w-full bg-green-800 hover:bg-green-700 text-white py-2 rounded-md">
               Sign In

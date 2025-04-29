@@ -19,7 +19,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-md px-6 md:px-10 py-4 flex items-center justify-between">
+    <nav className="bg-green-50 shadow-md px-6 md:px-10 py-4 flex items-center justify-between">
       {/* Left Side - Logo */}
       <div className="text-2xl font-bold text-green-900">
         <Link to="/">ScaledChat</Link>
