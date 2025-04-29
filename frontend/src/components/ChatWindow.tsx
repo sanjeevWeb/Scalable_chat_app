@@ -26,7 +26,7 @@ function ChatWindow() {
     }, [messages]);
 
     return (
-        <div className="flex-1 bg-gradient-to-tr from-white to-blue-50 flex flex-col">
+        <div className="flex-1 h-full flex flex-col bg-gradient-to-tr from-white to-blue-50">
             <div className="flex items-center gap-4 p-4 border-b">
                 <img src="https://randomuser.me/api/portraits/men/2.jpg" className="w-12 h-12 rounded-full" alt="User" />
                 <div className="text-lg font-bold">Elon Musk</div>

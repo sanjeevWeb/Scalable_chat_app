@@ -3,7 +3,8 @@ import ChatWindow from "../components/ChatWindow";
 
 function ChatPage() {
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen w-full overflow-hidden">
+      {/* <SearchBar /> */}
       <Sidebar />
       <ChatWindow />
     </div>
